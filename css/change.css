@@ -1,0 +1,50 @@
+﻿.content {
+    text-align: center;
+}
+
+    .content h3 {
+        margin-top: 10%;
+        font-size: 2em;
+        font-weight: 400;
+        margin-bottom: 8%;
+    }
+
+    .content div {
+        text-align: left;
+        border: 2px solid #AAA;
+        padding: 20px 10px;
+        width: 80%;
+        margin-left: 10%;
+        position: relative;
+    }
+
+        .content div:first-of-type {
+            margin-top: 4%;
+        }
+
+        .content div label {
+            font-size: 1.5em;
+        }
+
+        .content div input, .content div select, .content div textarea, .content div .file {
+            width: 50%;
+            margin-left: 10%;
+            border: 0;
+            border-bottom: 2px solid #AAA;
+            padding: 8px 10px;
+            position: absolute;
+            left: 200px
+        }
+
+        .content div:last-of-type {
+            margin-bottom: 4%;
+        }
+
+    .content .btn {
+        padding: 10px 30px;
+        background-color: #000;
+        border-radius: 15px;
+        text-decoration: none;
+        font-size: 1.2em;
+        color: #fff;
+    }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<link rel=stylesheet href="css/framework.css"/>
+<link rel=stylesheet href="css/normalize.css"/>
+<link rel=stylesheet href="css/all.min.css"/>
+<link rel=stylesheet href="css/style.css"/>
+<title>Agerly</title>
+<style>
+button{
+    background-color: transparent;
+    border: 0;
+}
+section form select, input[type="number"]{
+    margin-right:2%;
+}
+form div ul li {
+    display: inline;
+}
+input[type="number"] {
+    margin-left: 0;}
+button i:hover{
+    color:#000;
+}
+</style>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript">
+window.onload=function ()
+{
+    var govern=document.getElementById("govern");
+ $.ajax({
+ type: 'post',
+ url: 'phpscripts/fetchGoverns.php',
+ 
+ success: function (response) {
+  govern.innerHTML=response; 
+ }
+ });
+};
+function select()
+{
+    var govern=document.getElementById("govern"),
+    val=govern.value;
+    
+ $.ajax({
+ type: 'post',
+ url: 'phpscripts/fetch_data.php',
+ data: {
+  get_option:val
+ },
+ success: function (response) {
+  document.getElementById("city").innerHTML=response; 
+ }
+ });
+};
+</script>
+</head>
+<body>
+<div class="content-container">
+    <nav>
+    <div class="container">
+      <h2><a href="Home.html">Agerly</a></h2>
+       
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="visitor/result.php">Search</a></li>
+            <li><a href="#">Contact</a></li>
+             <li><a href="sign.php">Login/singup</a></li>
+        </ul>
+    </div>
+</nav>
+<section>
+    <div class="container">
+        <h2>Do you want to rent Apartement? </h2>
+        
+        <form action="visitor/result.php" method="GET">
+            <div>
+                <ul>
+                   <li><select name="govern" id="govern" onchange="select()" placeholder="Govern" required>
+                    <option >Select Govern</option>
+                    
+                </select></li>
+                <li> <select id="city" name="city">
+                </li>
+                <li><input type=number placeholder="Price" name="price" required/> </li>
+                <li><button type="submit"><i class="fas fa-search"></i></button></li>
+                </ul>
+                
+            </div>
+        </form>
+        <h3 class="btn"><a href="sign.php">Add Your Apartement</a></h3>
+        
+    </div>
+</section>
+<footer>
+   <div class="container">
+   <div>
+      Copyrights &copy; 2019 <br>
+    Dev. Ahmed Hegazy 
+   </div>
+    <ul>
+        <li><a href="#"><i class="fab fa-facebook "></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+                
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+    </ul>
+    </div>
+</footer>
+</div>
+
+
+
+</body>
+</html>

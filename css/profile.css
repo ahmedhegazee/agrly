@@ -1,0 +1,30 @@
+﻿
+#footer {
+    padding-top: 10px;
+    background-color: #AAA;
+    text-align: center;
+    height: 110px;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+    #footer ul {
+        margin: 10px auto;
+        width: 27%;
+        list-style: none;
+        left: 0;
+        font-size: 2em;
+    }
+
+        #footer ul li i {
+            color: #000;
+        }
+
+        #footer ul li {
+            float: left;
+            margin-left: 10px;
+        }
+
+            #footer ul li a i:hover {
+                color: #fff;
+            }

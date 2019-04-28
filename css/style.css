@@ -1,0 +1,187 @@
+*{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin:0;
+}
+.container{
+    width:95%;
+}
+.content-container{
+      background-attachment: fixed;
+    background: url(../img/Background.png);
+    height: 800px;
+    background-position: bottom;
+    background-origin: border-box;
+    background-repeat: no-repeat;
+}
+nav{
+    
+    width:95%;
+    margin:auto
+}
+body{
+    background-color: auto; 
+     color: #fff; 
+     height: auto; 
+}
+/*start navbar*/
+nav{
+    padding-top: 15px;
+    padding-bottom: 40px;
+}
+nav ul{
+    margin-left: 60%;
+    float: left;
+}
+nav h2{
+    float: left;
+    font-size:2em;
+    font-weight: 400;
+    top: 11px;
+    position: absolute;
+}
+nav ul li {
+    padding-right: 15px;
+    font-size: 1.5em;
+    border-right: 2px solid #fff;
+    padding-left: 5px;
+}
+nav ul li:last-of-type{
+    border:0;
+}
+nav ul li a:hover{
+    color:#AAA;
+}
+/*end navbar*/
+
+/*start section*/
+section{
+    padding-top:100px;
+}
+h2,form,section a{
+    text-align: center;
+}
+section h2{
+    font-size:3.3em;
+    font-weight: 400;
+    padding-bottom:40px;      
+}
+section form div{
+    background-color: #fff;
+    height:70px;
+    padding-top:20px;
+    width:60%;
+    margin:2px auto;
+    color:#000;
+    border-radius: 36px;
+    position:relative;
+}
+section form select,input[type="number"]{
+width: 200px;
+    height: 30px;
+    font-size: 1em;
+    border:0;
+    border-bottom:2px solid #000;
+    border-radius: 0;
+    background-color: transparent;
+}
+input[type="number"]{
+        margin-left: 13%;
+       color:#000;
+}
+section form select:hover{
+    color:#000;
+    cursor:default;
+}
+section div form ul li a i{
+    position: absolute;
+    top: 21px;
+    right: 53px;
+    font-size: 2.2em;
+    color:#000;
+}
+section div form ul li a i:hover{
+    color:#aaa;
+}
+
+/*end section*/
+
+/*start footer*/
+footer{
+       text-align: center;
+    font-size: 1.2em;
+    line-height: 1.7;
+    margin-top: 12%;
+}
+footer ul{
+    margin-top:2%;
+}
+footer ul li {
+    padding-left:5px;
+}
+footer ul li i{
+    font-size: 2em;
+}
+footer ul li i:hover{
+    color:#aaa;
+}
+/*end footer*/
+
+
+/*sign page*/
+.login,.signup{
+    float:left;
+    width:45%;
+}
+.login h2,.signup h2{
+    text-align: left;
+    padding-left:32%;
+    font-size:4em;
+}
+.signup{
+    margin-left:5%;
+   
+}
+.login input,.signup input{
+  background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    width: 50%;
+    font-size: 1.5em;
+    padding-left: 8px;
+    font-weight: 400;
+    line-height: 1.6;
+    
+    margin-bottom: 3%;
+}
+
+.login input:last-of-type,.signup input:last-of-type{
+    margin-bottom: 10%;
+}
+.login input::-webkit-input-placeholder,.signup input::-webkit-input-placeholder{
+    color:#fff;
+}
+.login input:-ms-input-placeholder,.signup input:-ms-input-placeholder{
+    color:#fff;
+}
+.login input::placeholder,.signup input::placeholder{
+    color:#fff;
+}
+
+
+.btn{ text-align: center;
+    margin-top: 4%;
+    background-color: #fff;
+    width: 30%;
+    margin: 4% auto;
+    border-radius: 30px;
+    font-size: 2em;
+    font-weight: 400;
+    padding: 10px 15px; }
+.btn a{
+    color:#000;
+}
+.login .btn,.signup .btn{
+     margin: 4% 25%;  
+}
