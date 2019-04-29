@@ -174,7 +174,7 @@ function select()
     height: 100px; ">
     <h1><b>Searched Apartements</b></h1>
     </div>
-    <a href="AddApartement.php" class="btn">Wished Apartement</a>
+    <a href="wishedlist.php" class="btn">Wished Apartement</a>
   </header>
   <?php
   global $pageno;
@@ -246,7 +246,7 @@ $total_pages = ceil($total_rows / $no_of_records_per_page);
       echo '<a href="Details.php?id='.$myrow["apartid"].'">';
       echo'<div class="w3-third w3-container">';
       echo'<img src="'."../apartimg/apart".$myrow["apartid"].'.jpg"   style="width:100%"  onmouseover="show('.($index-1).');" onmouseout="hide('.($index-1).');"   CssClass="w3-hover-opacity"/>';
-      echo ' <span class="span">Click for Editing</span> <div  class="w3-container w3-white">';
+      echo ' <span class="span">Click for Details</span> <div  class="w3-container w3-white">';
       echo' <p><b ><span >'.$myrow["firstname"]." ".$myrow["lastname"].'</span></b></p> ';
       echo' <p><b ><span >'.$myrow["GovernName"]." ".$myrow["CityName"].'</span></b></p> ';
       echo '<p ><span>'.$myrow["price"].'L.E<br/>'.$myrow["apartdescription"].'</span></p></div></div></a>';

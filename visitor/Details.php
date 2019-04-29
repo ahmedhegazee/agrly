@@ -147,6 +147,11 @@ function addApart(apart)
   apartid:apart
  },
  success: function (response) {
+  if(response==1)
+  {
+      alert ("the item is added to cart");
+      location.replace("http://localhost:8080/agrly/visitor/result.php");
+  }
   
  }
  });
