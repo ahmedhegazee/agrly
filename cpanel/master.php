@@ -39,11 +39,9 @@ echo '<body class="w3-light-grey w3-content" style="max-width: 1688px;">
   </div>
   <div class="w3-bar-block">
     <a href="cpanel.php"  class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Users Information</a> 
-    <a href="Settings.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog w3-margin-right"></i>Apartements Information</a> 
-    <a href="changepsw.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fas fa-cog w3-margin-right"></i>Change Password</a> 
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fas fa-comments w3-margin-right"></i>Chat</a>
   <a href="  logout.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fas fa-sign-out-alt w3-margin-right"></i>Log Out</a>
-      <a href="deactive.aspx" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fas fa-trash w3-margin-right"></i>Deactive</a>
+      
   </div>
   
 </nav>
