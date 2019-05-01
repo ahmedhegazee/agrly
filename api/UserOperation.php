@@ -1,0 +1,206 @@
+<?php
+//db user operations only
+/*
+*Dependancy:
+*PHPMailer library is for sending mails. Source :Github
+* You have to download it before running send_verification function
+* You can download it using compressor . It is a tool for installin php dependencies
+*Important Note :
+*if you use gmail as a sender email you have to enable some settings in security 
+*to allow gmail from sending mails.
+*/
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require ('../vendor/autoload.php');
+/*
+*Constants:
+*Database: Database Name
+*utable: The table name which contains your users information.
+*email : is the sender email.
+*emailpassword: is the password of sender email.
+*smtpport: it is the port which used to send emails .You can search for it base on your sender email
+*smtpserver: the server will sends emails
+*emailtitle: the title of mails which is sent to another emails
+*domain : is the domain will be generated from ngrok script to allow android app from accessing 
+*local host
+*/
+/*
+ *To use apis you have to change in SQL statements the table fields. 
+ */
+define("Database","agrly");
+define("utable","Users");
+define("email","egytourism2019@gmail.com");
+define("emailpassword","Egytou2019");
+define("smtpport","465");
+define("smtpserver","smtp.gmail.com");
+define("emailtitle","Successfully registration");
+define("domain","localhost:8080");
+$GLOBALS["db"] = mysqli_connect("localhost","root","",Database);
+/*
+ *Function Name :
+ *register()
+ *Functionality : 
+ *The function takes registration data from user and insert it in database.
+ *returns true if it executed succesfully and false for otherwise
+ *params:
+ *$firstname : stands for user first name
+ *$lastname : stands for the user last name
+ *$username : stands for user name which will be used in sign in
+ *$password : stands for user password wich will be used in sign in
+ *$email : stands for user email wich will be used for sending verification code
+ *$tel : stands for user mobile phone
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function register($firstname,$lastname,$username,$password,$email,$tel){
+$sql="INSERT INTO ".utable." (firstname, lastname, username, useremail, userpassword,usertel) VALUES ('$firstname','$lastname','$username','$email','$password',$tel);";
+if($result = mysqli_query($GLOBALS["db"],$sql))
+return TRUE;
+else
+return FALSE;
+}
+/*
+ *Function Name :
+ *check_email()
+ *Functionality : 
+ *The function takes user email and checks if the email is regestered before or not.
+ *returns true if the email is not found and false for otherwise
+ *params:
+ *$email : stands for user email 
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function check_email($email){
+    $sql="select useremail from ".utable." where useremail = '$email';";
+ $result = mysqli_query($GLOBALS["db"],$sql);
+ 
+ $row=mysqli_fetch_array($result);
+ if(count($row)>0)
+ return FALSE;
+ else
+ return TRUE;
+}
+/*
+ *Function Name :
+ *check_tel()
+ *Functionality : 
+ *The function takes user mobile phone and checks if the mobile phone is regestered before or not.
+ *returns true if it executed succesfully and false for otherwise
+ *params:
+ *$tel : stands for user mobile phone
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function check_tel($tel){
+    $sql="select useremail from ".utable." where usertel = '$tel';";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    
+    $row=mysqli_fetch_array($result);
+    if(count($row)>0)
+    return FALSE;
+    else
+    return TRUE;
+}
+/*
+ *Function Name :
+ *send_verification()
+ *Functionality : 
+ *The function takes user email to send him a verification email with code.
+ *The function generates the verification code
+ *Dependancy:
+ *PHPMailer library from Githup installed by comprosser
+ *returns true if the email is sent succesfully and false for otherwise
+ *params:
+ *$email : stands for user email wich will be used for sending verification code
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function send_verification($email){
+   $hash = md5( rand(0,1000) );
+   $sql="insert into Verification values('$email','$hash');";
+   if($result = mysqli_query($GLOBALS["db"],$sql))
+   {
+    $mail = new PHPMailer();
+    try {
+        $mail->setFrom(email, 'Agrly Support');
+       $mail->addAddress($email);
+       $mail->Subject = emailtitle;
+       
+       /* SMTP parameters. */
+       $mail->isSMTP();
+       $mail->Host = smtpserver;
+       $mail->SMTPAuth = TRUE;
+       $mail->SMTPSecure = 'ssl';
+       $mail->Username = email;
+       $mail->Password = emailpassword;
+       $mail->Port = smtpport;
+       $mail->SetFrom('noreply@hegz.com');
+       $mail->Body = ' 
+       Thanks for signing up!
+        
+       Please click this link to activate your account:
+       http://'.domain.'/agrly/verification.php?email='.$email.'&hash='.$hash.'
+        '; // Our message above including the link
+       return $mail->send();
+       
+     }
+     catch (Exception $e)
+     {
+        /* PHPMailer exception. */
+        echo $e->errorMessage();
+     }
+     catch (\Exception $e)
+     {
+        /* PHP exception (note the backslash to select the global namespace Exception class). */
+        echo $e->getMessage();
+     }
+     
+   }
+   else
+   return false;
+  
+}
+/*
+ *Function Name :
+ *check_verification()
+ *Functionality : 
+ *The function takes user name and user password to check if he is verified or not.
+ *returns true if the user is verified and false for otherwise
+ *params:
+ *$username : stands for user name
+ *$password : stands for user password
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function check_verification($username,$password){
+    
+    $sql="SELECT userid,verified FROM ".utable." WHERE username='$username'and userpassword='$password';";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    $myrow = mysqli_fetch_array($result);
+    $verified =$myrow["verified"];
+    if($verified==1){
+        return TRUE;
+    }
+    else 
+    return FALSE;
+}
+/*
+ *Function Name :
+ *sign()
+ *Functionality : 
+ *The function takes user name and user password to sign in and return user id.
+ *params:
+ *$username : stands for user name
+ *$password : stands for user password
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function sign($username,$password){
+    $sql="SELECT userid FROM ".utable." WHERE username='$username'and userpassword='$password';";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    $myrow = mysqli_fetch_array($result);
+  
+        $uid=$myrow["userid"];
+        if(isset($uid))
+        return $uid;
+    
+    else
+    return 0;
+    
+    
+}
+?>
