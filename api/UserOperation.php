@@ -203,4 +203,74 @@ function sign($username,$password){
     
     
 }
+/*
+ *Function Name :
+ *check_found_token()
+ *Functionality : 
+ *The function takes user id to check if the token is found or not .
+ *It it is found , it returns token code else returns No Token.
+ *params:
+ *$uid : stands for user id
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function check_found_token($uid){
+    $sql="SELECT token FROM AccessToken WHERE userid=$uid;";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    $myrow = mysqli_fetch_array($result);
+        $token=$myrow["token"];
+        if(isset($token))
+        return $token;
+    
+    else 
+    return "No Token";
+}
+/*
+ *Function Name :
+ *generate_token()
+ *Functionality : 
+ *The function takes user id and generates access token .
+ *Then it inserts this token in database.
+ *params:
+ *$uid : stands for user id
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function generate_token($uid){
+    $token = bin2hex(random_bytes(64));
+    $sql="INSERT INTO AccessToken VALUES($uid,'$token');";
+    if($result = mysqli_query($GLOBALS["db"],$sql)){
+        return $token;
+    }
+    else
+    return FALSE;
+}
+/*
+ *Function Name :
+ *check_userid()
+ *Functionality : 
+ *The function takes user id and checks if the user is registered or not .
+ *params:
+ *$uid : stands for user id
+ *You can change this parameters for your purposes and don't to forget to change sql statment
+ */
+function check_userid($uid){
+    $sql="select userid from ".utable." where userid = $uid;";
+ $result = mysqli_query($GLOBALS["db"],$sql);
+ 
+ $row=mysqli_fetch_array($result);
+ if($row!=NULL)
+ return TRUE;
+ else
+ return FALSE;
+}
+function check_token($token){
+    $sql="SELECT userid FROM AccessToken WHERE token='$token';";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    $myrow = mysqli_fetch_array($result);
+        $userid=$myrow["userid"];
+        if(isset($userid))
+        return $userid;
+    
+    else 
+    return "No Token";
+}
 ?>
