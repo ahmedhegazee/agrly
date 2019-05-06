@@ -12,15 +12,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         $target_dir=dirname(__DIR__,1)."/profileimg/";
         $temp_name = $_FILES['myfile']['tmp_name'];
         if(is_uploaded_file($temp_name)){
-              $storedFileName=$target_dir."prof".$uid.".jpg";
-              echo $storedFileName;
+            $filename="prof".$uid.".jpg";
+              $storedFileName=$target_dir.$filename;
+              
+             require_once("../api/UserOperation.php");
             if (file_exists($storedFileName)) 
             {
-                chmod(dirname(__DIR__,1)."/profileimg",0755);
                 chmod($storedFileName,0755);//changes the file permission to write / execute
                 unlink($storedFileName);
                 }
                     move_uploaded_file($temp_name,$storedFileName);
+                    resizeProfImage($filename,$storedFileName);
                     chmod($storedFileName,0744);//changes the file permission to readonly
     }
     }
@@ -29,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         
     echo "<script>alert('Your Profile Image is changed.');</script>\n";
     header( "refresh:0.2;url=http://localhost:8080/agrly/customer/profile.php");
-    echo"<script>location.reload();</script>";
+    //echo"<script>location.reload();</script>";
 }
 ?>
 <!DOCTYPE html>

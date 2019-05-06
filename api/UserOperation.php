@@ -11,6 +11,7 @@
 */
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use \Gumlet\ImageResize;
 require ('../vendor/autoload.php');
 /*
 *Constants:
@@ -291,5 +292,28 @@ function displayUserInfo($uid){
  else
  $userdata["image"]="Ahmed.png";
  return $userdata;
+}
+
+function resizeProfImage($filename,$sourcefile){
+    $image = new ImageResize($sourcefile);
+    $image->resize(600, 300);
+    $target_dir=dirname(__DIR__,1)."/android/profileimg/";
+    if (file_exists($target_dir.$filename)) 
+            {
+                chmod($target_dir.$filename,0755);//changes the file permission to write / execute
+                unlink($target_dir.$filename);
+                }
+    $image->save($target_dir.$filename);
+}
+function resizeApartImage($filename,$sourcefile){
+    $image = new ImageResize($sourcefile);
+    $image->resize(600, 300);
+    $target_dir=dirname(__DIR__,1)."/android/apartimg/";
+    if (file_exists($target_dir.$filename)) 
+            {
+                chmod($target_dir.$filename,0755);//changes the file permission to write / execute
+                unlink($target_dir.$filename);
+                }
+    $image->save($target_dir.$filename);
 }
 ?>
