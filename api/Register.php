@@ -22,7 +22,7 @@ and isset($_POST["lastname"])
     //check for the phone and email
     if(check_tel($usertel)&&check_email($email)){
         //register the user
-        if(register($firstname,$lastname,$username,$password,$email,$usertel)&&send_verification($email)){
+        if(register($firstname,$lastname,$username,$password,$email,intval($usertel))&&send_verification($email)){
         $arr["error"]=false;
         $arr["message"]="Successful Registration.Check your email";
         }

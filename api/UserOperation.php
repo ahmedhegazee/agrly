@@ -74,7 +74,17 @@ function check_email($email){
  $result = mysqli_query($GLOBALS["db"],$sql);
  
  $row=mysqli_fetch_array($result);
- if(count($row)>0)
+ if($row!=null)
+ return FALSE;
+ else
+ return TRUE;
+}
+function check_username($un){
+    $sql="select * from ".utable." where username = '$un';";
+ $result = mysqli_query($GLOBALS["db"],$sql);
+ 
+ $row=mysqli_fetch_array($result);
+ if($row!=null)
  return FALSE;
  else
  return TRUE;
@@ -94,7 +104,7 @@ function check_tel($tel){
     $result = mysqli_query($GLOBALS["db"],$sql);
     
     $row=mysqli_fetch_array($result);
-    if(count($row)>0)
+    if($row!=null)
     return FALSE;
     else
     return TRUE;
