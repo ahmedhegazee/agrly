@@ -17,7 +17,8 @@ if(isset($_POST["token"])){
         $userid=check_token($token);
         if($userid!="No Token"){
             $arr["error"]=false;
-            $arr["message"]=$userid;
+            $arr["message"]="Token is right";
+            $arr["data"]=displayUserInfo($userid);
         }
         else{
             $arr["error"]=true;

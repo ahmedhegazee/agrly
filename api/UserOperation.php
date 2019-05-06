@@ -273,4 +273,23 @@ function check_token($token){
     else 
     return "No Token";
 }
+function displayUserInfo($uid){
+    $sql="select * from ".utable." where userid = $uid;";
+ $result = mysqli_query($GLOBALS["db"],$sql);
+ 
+ $row=mysqli_fetch_array($result);
+ $userdata =array();
+ $userdata["username"]=$row["username"];
+ $userdata["firstname"]=$row["firstname"];
+ $userdata["lastname"]=$row["lastname"];
+ $userdata["usertel"]=$row["usertel"];
+ $userdata["email"]=$row["useremail"];
+ $file= dirname(__DIR__)."/profileimg/prof".$uid.".jpg";
+    $profimg="prof".$uid.".jpg";
+    if(file_exists($file))
+ $userdata["image"]=$profimg;
+ else
+ $userdata["image"]="Ahmed.png";
+ return $userdata;
+}
 ?>

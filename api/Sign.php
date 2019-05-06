@@ -1,5 +1,5 @@
 <?php
-
+global $uid,$token;
 require_once "UserOperation.php";
 $arr=array();
 //check for the request
@@ -18,7 +18,17 @@ $uid =sign($username,$password);
         if(check_verification($username,$password)){
         $arr["error"]=false;
         $arr["message"]="Welcome";
-        $arr["data"]=$uid;
+
+        $token=check_found_token($uid);
+        if($token!="No Token"){
+            $arr["error"]=false;
+            $arr["data"]=$token;
+        }
+        else{
+            $token =generate_token($uid);
+            $arr["error"]=false;
+            $arr["data"]=$token;
+        }
         }
         else{
             $arr["error"]=true;
@@ -40,5 +50,4 @@ $arr["error"]=true;
 $arr["message"]="Wrong Request";
 }
 echo json_encode($arr);
-?>
 ?>
