@@ -12,8 +12,8 @@ if(isset($_POST["tel"])){
             $arr["message"]="The mobile phone is not registered";
         }
     else{
-        $arr["error"]=true;
-        $arr["message"]="mobile phone is  registered";
+        $arr["errorm"]=true;
+        $arr["message"]="mobile phone is registered";
     }
 }
 else{
