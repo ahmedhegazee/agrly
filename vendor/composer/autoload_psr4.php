@@ -7,6 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Spipu\\Html2Pdf\\' => array($vendorDir . '/spipu/html2pdf/src'),
+    'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
+    'GuzzleHttp\\Ring\\' => array($vendorDir . '/guzzlehttp/ringphp/src'),
     'Gumlet\\' => array($vendorDir . '/gumlet/php-image-resize/lib'),
+    'Elasticsearch\\' => array($vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch'),
+    'Elastica\\' => array($vendorDir . '/ruflin/elastica/lib/Elastica'),
+    'Cake\\ElasticSearch\\' => array($vendorDir . '/cakephp/elastic-search/src'),
 );

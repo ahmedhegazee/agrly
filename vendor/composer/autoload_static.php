@@ -6,18 +6,38 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit4aa7c89d29aca5c190686f51271a9b66
 {
+    public static $files = array (
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
             'Spipu\\Html2Pdf\\' => 15,
         ),
+        'R' => 
+        array (
+            'React\\Promise\\' => 14,
+        ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'G' => 
         array (
+            'GuzzleHttp\\Stream\\' => 18,
+            'GuzzleHttp\\Ring\\' => 16,
             'Gumlet\\' => 7,
+        ),
+        'E' => 
+        array (
+            'Elasticsearch\\' => 14,
+            'Elastica\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Cake\\ElasticSearch\\' => 19,
         ),
     );
 
@@ -26,13 +46,41 @@ class ComposerStaticInit4aa7c89d29aca5c190686f51271a9b66
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
         ),
+        'React\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'GuzzleHttp\\Stream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/streams/src',
+        ),
+        'GuzzleHttp\\Ring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/ringphp/src',
+        ),
         'Gumlet\\' => 
         array (
             0 => __DIR__ . '/..' . '/gumlet/php-image-resize/lib',
+        ),
+        'Elasticsearch\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch',
+        ),
+        'Elastica\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ruflin/elastica/lib/Elastica',
+        ),
+        'Cake\\ElasticSearch\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/elastic-search/src',
         ),
     );
 
