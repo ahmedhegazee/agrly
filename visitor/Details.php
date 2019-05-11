@@ -63,7 +63,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     height: 130px;
     color:#fff;
     font-size:1.2em;
-    margin-top:35%;
+    margin-top:60%;
 }
 
 #footer ul{

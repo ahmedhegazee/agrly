@@ -3,9 +3,14 @@ require dirname(__DIR__).'/vendor/autoload.php';
 
 use Spipu\Html2Pdf\Html2Pdf;
 session_start();
-$items = $_SESSION['cart'];
-$cartitems = explode(",", $items);
+//$items = ;
+$cartitems = $_SESSION['cart'];
 $html=" ";
+if(count($items)==0){
+    echo "<script>alert('You don't have Wished Apartemnets')</script>";
+    header( "refresh:0.2;url=http://localhost:8080/agrly/visitor/result.php");
+}
+else{
 $db=mysqli_connect("localhost","root","","agrly");
     foreach($cartitems as $id){
         $aid=intval($id);
@@ -27,4 +32,5 @@ $db=mysqli_connect("localhost","root","","agrly");
 $html2pdf = new Html2Pdf();
 $html2pdf->writeHTML($html);
 $html2pdf->output();
+}
 ?>

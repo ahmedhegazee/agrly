@@ -37,6 +37,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     height: 130px;
     color:#fff;
     font-size:1.2em;
+    margin-top:50%;
 }
 
 #footer ul{
@@ -95,7 +96,44 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     background-color: transparent;
     margin-bottom: 10%;
 }
+.w3-third{
+    background-color: #fff;
+text-align: center;
+}
+#delete{
+    background-color: #F00;
+    margin:0;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    border-radius: 41px;
+    color:#fff;
+}
 </style>
+<script type="text/javascript" src="../scripts/jquery.js"></script>
+<script type="text/javascript">
+
+function deleteAprt(apart)
+{
+    
+    
+ $.ajax({
+ type: 'post',
+ url: '../phpscripts/deleteCart.php',
+ data: {
+  apartid:apart
+ },
+ success: function (response) {
+  if(response==1)
+  {
+      alert ("the item is deleted from cart");
+      location.replace("http://localhost:8080/agrly/visitor/result.php");
+  }
+  
+ }
+ });
+};
+</script>
+
 </head>
 <body class="w3-light-grey w3-content" style="max-width: 1688px;">
 
@@ -105,7 +143,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
   
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px">
+<div class="w3-main"  >
 
   <!-- Header -->
   <header id="portfolio">
@@ -113,7 +151,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container" style="
     height: 100px; ">
-    <h1><b>Wished Apartements</b></h1>
+    <h1 style="text-align: center;"><b>Wished Apartements</b></h1>
     </div>
     <a href="../phpscripts/pdfgenerator.php" class="btn">Print</a>
   </header>
@@ -121,39 +159,33 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
   session_start();
   if(isset($_SESSION['cart']) ){
-	$items = $_SESSION['cart'];
-	$cartitems = explode(",", $items);
-
-    $db=mysqli_connect("localhost","root","","agrly");
-    foreach($cartitems as $id){
-        $aid=intval($id);
-        $sql1="SELECT apartid,apartdescription,price,u.firstname,u.lastname,u.usertel,g.GovernName,c.CityName 
-        FROM ((Apartements a join Users u on a.userid=u.userid)
-        join Govern g on a.govern = g.GovernID) join City c on a.city=c.CityID 
-        WHERE a.apartid=$aid";
-         $result1 = mysqli_query($db,$sql1);
-         $myrow = mysqli_fetch_array($result1);
-         
-        echo'<div class="w3-third w3-container">';
-        echo'<img src="'."../apartimg/apart".$myrow["apartid"].'.jpg"   style="width:100%"      CssClass="w3-hover-opacity"/>';
-        echo' <p><b ><span >'.$myrow["firstname"]." ".$myrow["lastname"].'</span></b></p> ';
-        echo' <p><b ><span >'.$myrow["GovernName"]." ".$myrow["CityName"].'</span></b></p> ';
-        echo '<p ><span>'.$myrow["usertel"].'</span></p>';
-        echo '<p ><span>'.$myrow["price"].'L.E<br/>'.$myrow["apartdescription"].'</span></p></div></div>';
-
+	//$items = $_SESSION['cart'];
+	$cartitems = $_SESSION['cart'];
+    if(count($cartitems)==0){
+        echo "<script>alert('You don't have Wished Apartemnets')</script>";
+        header( "refresh:0.2;url=http://localhost:8080/agrly/visitor/result.php");
     }
-    
-      
-        
+    else{
+        $db=mysqli_connect("localhost","root","","agrly");
+        foreach($cartitems as $id){
+            $aid=intval($id);
+            $sql1="SELECT apartid,apartdescription,price,u.firstname,u.lastname,u.usertel,g.GovernName,c.CityName 
+            FROM ((Apartements a join Users u on a.userid=u.userid)
+            join Govern g on a.govern = g.GovernID) join City c on a.city=c.CityID 
+            WHERE a.apartid=$aid";
+             $result1 = mysqli_query($db,$sql1);
+             $myrow = mysqli_fetch_array($result1);
+             
+            echo'<div class="w3-third w3-container">';
+            echo'<img src="'."../apartimg/apart".$myrow["apartid"].'.jpg"   style="width:100%;"      CssClass="w3-hover-opacity"/>';
+            echo' <p><b ><span >'.$myrow["firstname"]." ".$myrow["lastname"].'</span></b></p> ';
+            echo' <p><b ><span >'.$myrow["GovernName"]." ".$myrow["CityName"].'</span></b></p> ';
+            echo '<p ><span>'.$myrow["usertel"].'</span></p>';
+            echo '<p ><span>'.$myrow["price"].'L.E<br/>'.$myrow["apartdescription"].'</span></p>';
+            echo '<button id="delete" onclick="deleteAprt('.intval($myrow["apartid"]).')">Delete</button></div></div>';
+        }
+    }
       }
-
-  
-    
-
-
-
-  
-
   ?>
  
 
