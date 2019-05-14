@@ -303,7 +303,66 @@ function displayUserInfo($uid){
  $userdata["image"]="Ahmed.png";
  return $userdata;
 }
+function displayUserApart($token){
+    $sql="SELECT * FROM Apartements ap join AccessToken ac on ap.userid = ac.userid where ac.token ='$token';";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    $userdata=array();
+    $apart=array();
+     $index=0;
+    while($row=mysqli_fetch_array($result)){
+    if($index==4)
+        break;
+    $apart=array(
+    "id"=>$row["apartid"],
+    "govern"=>$row["govern"],
+    "city"=>$row["city"],
+    "price"=>$row["price"],
+    "numOfRooms"=>$row["numOfRooms"],
+    "numOfKitchen"=>$row["numOfKitchen"],
+    "numOfBathrooms"=>$row["numOfBathrooms"],
+    "apartdescription"=>$row["apartdescription"]
+    );
 
+    $file= dirname(__DIR__)."/apartimg/apart".$row["apartid"].".jpg";
+    $profimg="apart".$row["apartid"]."jpg";
+    if(file_exists($file))
+    $apart["image"]=$profimg;
+    else
+    $apart["image"]="Ahmed.png";
+    $index++;
+    array_push($userdata,$apart);
+
+ }
+ 
+ 
+    return $userdata;
+}
+function displayApartInfo($apartid){
+    $sql="SELECT * FROM Apartements where apartid=$apartid;";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    $apart=array();
+    $row=mysqli_fetch_array($result);
+   
+    $apart=array(
+    "id"=>$row["apartid"],
+    "govern"=>$row["govern"],
+    "city"=>$row["city"],
+    "price"=>$row["price"],
+    "numOfRooms"=>$row["numOfRooms"],
+    "numOfKitchen"=>$row["numOfKitchen"],
+    "numOfBathrooms"=>$row["numOfBathrooms"],
+    "apartdescription"=>$row["apartdescription"]
+    );
+
+    $file= dirname(__DIR__)."/apartimg/apart".$row["apartid"].".jpg";
+    $profimg="apart".$row["apartid"]."jpg";
+    if(file_exists($file))
+    $apart["image"]=$profimg;
+    else
+    $apart["image"]="Ahmed.png";
+
+    return $apart;
+}
 function resizeProfImage($filename,$sourcefile){
     $image = new ImageResize($sourcefile);
     $image->resize(600, 300);

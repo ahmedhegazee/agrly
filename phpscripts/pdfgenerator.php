@@ -6,7 +6,7 @@ session_start();
 //$items = ;
 $cartitems = $_SESSION['cart'];
 $html=" ";
-if(count($items)==0){
+if(count($cartitems)==0){
     echo "<script>alert('You don't have Wished Apartemnets')</script>";
     header( "refresh:0.2;url=http://localhost:8080/agrly/visitor/result.php");
 }
