@@ -304,7 +304,7 @@ function displayUserInfo($uid){
  return $userdata;
 }
 function displayUserApart($token){
-    $sql="SELECT * FROM Apartements ap join AccessToken ac on ap.userid = ac.userid where ac.token ='$token';";
+    $sql="SELECT * FROM ((Apartements a join AccessToken ac on a.userid = ac.userid) join Govern g on a.govern=g.GovernID) join City c on c.CityID=a.city where ac.token ='$token';";
     $result = mysqli_query($GLOBALS["db"],$sql);
     $userdata=array();
     $apart=array();
@@ -314,8 +314,8 @@ function displayUserApart($token){
         break;
     $apart=array(
     "id"=>$row["apartid"],
-    "govern"=>$row["govern"],
-    "city"=>$row["city"],
+    "govern"=>$row["GovernName"],
+    "city"=>$row["CityName"],
     "price"=>$row["price"],
     "numOfRooms"=>$row["numOfRooms"],
     "numOfKitchen"=>$row["numOfKitchen"],
@@ -338,15 +338,15 @@ function displayUserApart($token){
     return $userdata;
 }
 function displayApartInfo($apartid){
-    $sql="SELECT * FROM Apartements where apartid=$apartid;";
+    $sql="SELECT * FROM (Apartements a join Govern g on a.govern=g.GovernID) join City c on c.CityID=a.city  where apartid=$apartid;";
     $result = mysqli_query($GLOBALS["db"],$sql);
     $apart=array();
     $row=mysqli_fetch_array($result);
    
     $apart=array(
     "id"=>$row["apartid"],
-    "govern"=>$row["govern"],
-    "city"=>$row["city"],
+    "govern"=>$row["GovernName"],
+    "city"=>$row["CityName"],
     "price"=>$row["price"],
     "numOfRooms"=>$row["numOfRooms"],
     "numOfKitchen"=>$row["numOfKitchen"],

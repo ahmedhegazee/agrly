@@ -29,7 +29,7 @@ $uid =sign($username,$password);
             $arr["error"]=false;
             $arr["data"]=$token;
         }
-        $arr["Apartements"]=displayUserApart($token);
+      //  $arr["Apartements"]=displayUserApart($token);
         }
         else{
             $arr["error"]=true;
