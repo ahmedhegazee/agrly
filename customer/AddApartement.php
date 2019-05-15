@@ -27,12 +27,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     $file = $_FILES['myfile']['name'];
     if(isset($file)){
         $target_dir=dirname(__DIR__,1)."/apartimg/";
-        $temp_name = $_FILES['myfile']['tmp_name'];
+        $temp_name = $_FILES['myfile']['name'];
         if(is_uploaded_file($temp_name)){
              
               $filename="apart".$aprtid.".jpg";
               $storedFileName=$target_dir.$filename;
-              
+              echo $storedFileName;
              require_once("../api/UserOperation.php");
             if (file_exists($storedFileName)) 
             {
@@ -40,8 +40,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                 chmod($storedFileName,0755);//changes the file permission to write / execute
                 unlink($storedFileName);
                 }
+                move_uploaded_file($temp_name,$storedFileName);
                 resizeApartImage($filename,$storedFileName);
-                    move_uploaded_file($temp_name,$storedFileName);
                     chmod($storedFileName,0744);//changes the file permission to readonly
         
     }

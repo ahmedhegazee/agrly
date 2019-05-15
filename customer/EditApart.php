@@ -53,7 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     $file = $_FILES['myfile']['name'];
     if(isset($file)){
         $target_dir=dirname(__DIR__,1)."/apartimg/";
-        $temp_name = $_FILES['myfile']['tmp_name'];
+        $temp_name = $_FILES['myfile']['name'];
         if(is_uploaded_file($temp_name)){
             $filename="apart".$aprtid.".jpg";
               $storedFileName=$target_dir.$filename;
