@@ -5,6 +5,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     $result = mysqli_query($db,$sql);
     
     $data = array();
+    array_push($data,"all");
     while($row = mysqli_fetch_array($result)){
       /*  $govern =array(
             "Govern"=>$row["GovernName"],
@@ -13,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         );*/
         array_push($data,$row["GovernName"]);
     }
-    array_push($data,"all");
+    
     $output=array();
     $output["Governs"]=$data;
     echo json_encode($output);

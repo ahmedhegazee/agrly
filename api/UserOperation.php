@@ -337,6 +337,43 @@ function displayUserApart($token){
  
     return $userdata;
 }
+function displaySearchApart($govern,$price){
+    if($govern==0)
+    $sql="SELECT * FROM ((Apartements a join AccessToken ac on a.userid = ac.userid) join Govern g on a.govern=g.GovernID) join City c on c.CityID=a.city ;";
+    else
+    $sql="SELECT * FROM ((Apartements a join AccessToken ac on a.userid = ac.userid) join Govern g on a.govern=g.GovernID) join City c on c.CityID=a.city where a.govern =$govern and a.price<=$price;";
+    $result = mysqli_query($GLOBALS["db"],$sql);
+    $userdata=array();
+    $apart=array();
+     $index=0;
+    while($row=mysqli_fetch_array($result)){
+    if($index==4)
+        break;
+    $apart=array(
+    "id"=>$row["apartid"],
+    "govern"=>$row["GovernName"],
+    "city"=>$row["CityName"],
+    "price"=>$row["price"],
+    "numOfRooms"=>$row["numOfRooms"],
+    "numOfKitchen"=>$row["numOfKitchen"],
+    "numOfBathrooms"=>$row["numOfBathrooms"],
+    "apartdescription"=>$row["apartdescription"]
+    );
+
+    $file= dirname(__DIR__)."/apartimg/apart".$row["apartid"].".jpg";
+    $profimg="apart".$row["apartid"]."jpg";
+    if(file_exists($file))
+    $apart["image"]=$profimg;
+    else
+    $apart["image"]="Ahmed.png";
+    $index++;
+    array_push($userdata,$apart);
+
+ }
+ 
+ 
+    return $userdata;
+}
 function displayApartInfo($apartid){
     $sql="SELECT * FROM (Apartements a join Govern g on a.govern=g.GovernID) join City c on c.CityID=a.city  where apartid=$apartid;";
     $result = mysqli_query($GLOBALS["db"],$sql);
